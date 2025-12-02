@@ -19,6 +19,9 @@ end
 # ╔═╡ c10c22b2-58e9-4b92-ad71-6977f2e0ba90
 using PlutoUI
 
+# ╔═╡ d1ff307e-07d5-4588-99ae-8517a1358e97
+using HypertextLiteral: @htl
+
 # ╔═╡ dd023058-f957-49ac-b319-a7b15bc987b0
 # Here, we have a polynomial 3x^3 - 4x^2 - 6
 # represented by a coefficient matrix, column-wise
@@ -68,12 +71,48 @@ polynomial_derivative(f2_x)
 # ╔═╡ 94af027b-9d6d-42ad-8099-f54abc7dd8c6
 parse(Float64, hello)
 
+# ╔═╡ 9f6ff54f-d518-4099-af5d-82b26f1e4414
+@bind add CounterButton("Add")
+
+# ╔═╡ 9abeee65-a0e5-4966-9684-11500bc33bc8
+@bind del CounterButton("Delete")
+
+# ╔═╡ 116e9cd7-21ba-4537-8e92-e0fe3c129c43
+count = max(add - del, 1)
+
+# ╔═╡ 47490066-6bb2-4d90-9c34-3b201a0673fe
+@bind values confirm(PlutoUI.combine() do Child
+	
+    elements = Any[]
+    x = "x^"
+    
+    for i in 1:count
+        push!(elements, md"**$(i > 1 ? x * string(i) : 0)**")
+        push!(elements, Child(TextField(default="")))
+    end
+
+    @htl("""
+    <div>
+        $(elements...)
+    </div>
+    """)
+end)
+
+# ╔═╡ d45aea87-1f3a-456a-8d98-295d5c6fb873
+if values !== nothing
+	F_x = [x === "" ? 0.0 : parse(Float64, x) for x in values]
+	F_xprime = polynomial_derivative(F_x)
+	print(F_xprime)
+end
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
+HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
+HypertextLiteral = "~0.9.5"
 PlutoUI = "~0.7.75"
 """
 
@@ -81,9 +120,9 @@ PlutoUI = "~0.7.75"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.1"
+julia_version = "1.12.2"
 manifest_format = "2.0"
-project_hash = "cc9a98ce2ec385317936306b51b89ff4f0623e03"
+project_hash = "f2254a9037a643261c1b40a501c5c15c25839265"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -126,7 +165,7 @@ version = "1.11.0"
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.6.0"
+version = "1.7.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -180,7 +219,7 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.11.1+1"
+version = "8.15.0+0"
 
 [[deps.LibGit2]]
 deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
@@ -240,7 +279,7 @@ version = "0.3.29+0"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.1+0"
+version = "3.5.4+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -366,9 +405,9 @@ uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
 version = "1.64.0+1"
 
 [[deps.p7zip_jll]]
-deps = ["Artifacts", "Libdl"]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.5.0+2"
+version = "17.7.0+0"
 """
 
 # ╔═╡ Cell order:
@@ -384,5 +423,11 @@ version = "17.5.0+2"
 # ╠═c10c22b2-58e9-4b92-ad71-6977f2e0ba90
 # ╠═b9bed20f-d1f8-4a7d-af28-be2de53785c8
 # ╠═94af027b-9d6d-42ad-8099-f54abc7dd8c6
+# ╠═d1ff307e-07d5-4588-99ae-8517a1358e97
+# ╠═9f6ff54f-d518-4099-af5d-82b26f1e4414
+# ╠═9abeee65-a0e5-4966-9684-11500bc33bc8
+# ╠═116e9cd7-21ba-4537-8e92-e0fe3c129c43
+# ╠═47490066-6bb2-4d90-9c34-3b201a0673fe
+# ╠═d45aea87-1f3a-456a-8d98-295d5c6fb873
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
