@@ -18,6 +18,12 @@ permissions:
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
+        permissions:
+            pages: write
+            id-token: write
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page-url }}
         steps:
             - name: Checkout this repository
               uses: actions/checkout@v4
