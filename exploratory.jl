@@ -22,23 +22,8 @@ using PlutoUI
 # ╔═╡ d1ff307e-07d5-4588-99ae-8517a1358e97
 using HypertextLiteral: @htl
 
-# ╔═╡ dd023058-f957-49ac-b319-a7b15bc987b0
-# Here, we have a polynomial 3x^3 - 4x^2 - 6
-# represented by a coefficient matrix, column-wise
-f_x = [-6.0, 0, -4, 3]
-
-# ╔═╡ 0bda70c3-404e-4f34-a516-8dae153d7bb2
-derivative_m = [
-	0 1 0 0
-	0 0 2 0
-	0 0 0 3 
-]
-
-# ╔═╡ 3882e8a8-dc06-4e48-a65a-56595a1bbe56
-derivative_m * f_x
-
-# ╔═╡ aa49c8bf-7c56-48d4-a6af-33bc4b69a3eb
-zeros((2,))
+# ╔═╡ f50c3f3f-b374-4640-a226-52ce534741ce
+md"# Polynomial Derivative Solver"
 
 # ╔═╡ 0c466cfc-13b0-405b-ba7c-3da46ebf96bc
 function polynomial_derivative(P_x::Vector{<:Real})::Vector{<:Real}
@@ -53,6 +38,27 @@ function polynomial_derivative(P_x::Vector{<:Real})::Vector{<:Real}
 	Derivative * P_x
 end
 
+# ╔═╡ e04c6f2d-bfa9-49d0-9d20-01d2a21cb095
+md"# Test code"
+
+# ╔═╡ 0bda70c3-404e-4f34-a516-8dae153d7bb2
+derivative_m = [
+	0 1 0 0
+	0 0 2 0
+	0 0 0 3 
+]
+
+# ╔═╡ aa49c8bf-7c56-48d4-a6af-33bc4b69a3eb
+zeros((2,))
+
+# ╔═╡ dd023058-f957-49ac-b319-a7b15bc987b0
+# Here, we have a polynomial 3x^3 - 4x^2 - 6
+# represented by a coefficient matrix, column-wise
+f_x = [-6.0, 0, -4, 3]
+
+# ╔═╡ 3882e8a8-dc06-4e48-a65a-56595a1bbe56
+derivative_m * f_x
+
 # ╔═╡ 9462f3d7-3b1e-4b8c-ac8f-a14bc24ed43c
 polynomial_derivative(f_x)
 
@@ -64,6 +70,9 @@ polynomial_derivative(f2_x)
 
 # ╔═╡ 2bec0759-ecaf-495b-9948-c2891aa56694
 # 6x^2 
+
+# ╔═╡ 64ac904e-279d-4b55-8e66-e630ab7e2f6e
+md"# UI"
 
 # ╔═╡ b9bed20f-d1f8-4a7d-af28-be2de53785c8
 @bind hello confirm(TextField(default="1"))
@@ -84,10 +93,13 @@ count = max(add - del, 1)
 @bind values confirm(PlutoUI.combine() do Child
 	
     elements = Any[]
-    x = "x^"
     
-    for i in 1:count
-        push!(elements, md"**$(i > 1 ? x * string(i) : 0)**")
+    for i in 0:count
+        push!(elements,
+			  i > 1 ?
+				  Markdown.parse("``x^{$i}``")
+				  : i == 1
+					  ? md"``x``" : md"``c``")
         push!(elements, Child(TextField(default="")))
     end
 
@@ -120,7 +132,7 @@ PlutoUI = "~0.7.75"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.2"
+julia_version = "1.12.1"
 manifest_format = "2.0"
 project_hash = "f2254a9037a643261c1b40a501c5c15c25839265"
 
@@ -165,7 +177,7 @@ version = "1.11.0"
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.7.0"
+version = "1.6.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -219,7 +231,7 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.15.0+0"
+version = "8.11.1+1"
 
 [[deps.LibGit2]]
 deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
@@ -279,7 +291,7 @@ version = "0.3.29+0"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.1+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -405,21 +417,24 @@ uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
 version = "1.64.0+1"
 
 [[deps.p7zip_jll]]
-deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
+deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.7.0+0"
+version = "17.5.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═dd023058-f957-49ac-b319-a7b15bc987b0
-# ╠═0bda70c3-404e-4f34-a516-8dae153d7bb2
-# ╠═3882e8a8-dc06-4e48-a65a-56595a1bbe56
-# ╠═aa49c8bf-7c56-48d4-a6af-33bc4b69a3eb
+# ╠═f50c3f3f-b374-4640-a226-52ce534741ce
 # ╠═0c466cfc-13b0-405b-ba7c-3da46ebf96bc
+# ╠═e04c6f2d-bfa9-49d0-9d20-01d2a21cb095
+# ╠═0bda70c3-404e-4f34-a516-8dae153d7bb2
+# ╠═aa49c8bf-7c56-48d4-a6af-33bc4b69a3eb
+# ╠═3882e8a8-dc06-4e48-a65a-56595a1bbe56
+# ╠═dd023058-f957-49ac-b319-a7b15bc987b0
 # ╠═9462f3d7-3b1e-4b8c-ac8f-a14bc24ed43c
 # ╠═9ddc615c-cfe1-49f7-9ed6-0c9f75a833c7
 # ╠═c2e927fc-28ff-4251-9a90-98876c1c2b46
 # ╠═2bec0759-ecaf-495b-9948-c2891aa56694
+# ╠═64ac904e-279d-4b55-8e66-e630ab7e2f6e
 # ╠═c10c22b2-58e9-4b92-ad71-6977f2e0ba90
 # ╠═b9bed20f-d1f8-4a7d-af28-be2de53785c8
 # ╠═94af027b-9d6d-42ad-8099-f54abc7dd8c6
