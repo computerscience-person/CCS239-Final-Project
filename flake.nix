@@ -20,7 +20,6 @@
           pkgs = withPkgs system;
           julia' =
             (pkgs.julia.withPackages.override {
-              precompile = false;
               augmentedRegistry = pkgs.callPackage ./registry.nix { };
             })
               [
