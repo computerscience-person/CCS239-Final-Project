@@ -61,11 +61,14 @@ jobs:
                     # more parameters can go here
                   )'
 
-
-            - name: Deploy to gh-pages
-              uses: JamesIves/github-pages-deploy-action@releases/v4
+            - name: Setup Pages
+              uses: actions/configure-pages@v5
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
               with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  branch: gh-pages
-                  folder: .
-                  single-commit: true
+                # Upload entire repository
+                path: '.'
+            - name: Deploy to GitHub Pages
+              id: deployment
+              uses: actions/deploy-pages@v4
+
