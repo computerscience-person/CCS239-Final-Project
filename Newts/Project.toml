@@ -1,0 +1,10 @@
+name = "Newts"
+uuid = "1a7d9eb9-e98c-4c2a-9c96-f43605fda9e4"
+version = "0.1.0"
+authors = ["Oliver Ladores <oliver.ladores@wvsu.edu.ph>"]
+
+[deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[compat]
+Test = "1.11.0"
