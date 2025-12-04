@@ -16,27 +16,17 @@ macro bind(def, element)
     #! format: on
 end
 
+# ╔═╡ 091ece89-4b88-4bd8-8fc6-a29d08e2f653
+using Newts
+
 # ╔═╡ c10c22b2-58e9-4b92-ad71-6977f2e0ba90
 using PlutoUI
 
 # ╔═╡ d1ff307e-07d5-4588-99ae-8517a1358e97
 using HypertextLiteral: @htl
 
-# ╔═╡ f50c3f3f-b374-4640-a226-52ce534741ce
-md"# Polynomial Derivative Solver"
-
-# ╔═╡ 0c466cfc-13b0-405b-ba7c-3da46ebf96bc
-function polynomial_derivative(P_x::Vector{<:Real})::Vector{<:Real}
-	Derivative = zeros(size(P_x)[1] - 1, size(P_x)[1])
-	setindex!(
-		Derivative,
-		1:size(P_x)[1] - 1,
-		size(P_x)[1]: size(P_x)[1]: ((size(P_x)[1] - 1) * size(P_x)[1])
-	)
-	# print((size(P_x)[1] * size(P_x)[1]))
-	# display([size(P_x)[1]: size(P_x)[1]: ((size(P_x)[1] - 1) * size(P_x)[1])])
-	Derivative * P_x
-end
+# ╔═╡ e71106c5-5a1b-4558-b5db-86dba49b331c
+evaluate_at([0], 3)
 
 # ╔═╡ e04c6f2d-bfa9-49d0-9d20-01d2a21cb095
 md"# Test code"
@@ -168,6 +158,7 @@ end
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 HypertextLiteral = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
+Newts = "1a7d9eb9-e98c-4c2a-9c96-f43605fda9e4"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 
 [compat]
@@ -179,9 +170,9 @@ PlutoUI = "~0.7.75"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.12.2"
+julia_version = "1.12.1"
 manifest_format = "2.0"
-project_hash = "f2254a9037a643261c1b40a501c5c15c25839265"
+project_hash = "90d1fb2df5dc48eb0e4cc0b5201ce3c092bee0f6"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -224,7 +215,7 @@ version = "1.11.0"
 [[deps.Downloads]]
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
-version = "1.7.0"
+version = "1.6.0"
 
 [[deps.FileWatching]]
 uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
@@ -278,7 +269,7 @@ version = "0.6.4"
 [[deps.LibCURL_jll]]
 deps = ["Artifacts", "LibSSH2_jll", "Libdl", "OpenSSL_jll", "Zlib_jll", "nghttp2_jll"]
 uuid = "deac9b47-8bc7-5906-a0fe-35ac56dc84c0"
-version = "8.15.0+0"
+version = "8.11.1+1"
 
 [[deps.LibGit2]]
 deps = ["LibGit2_jll", "NetworkOptions", "Printf", "SHA"]
@@ -330,6 +321,15 @@ version = "2025.5.20"
 uuid = "ca575930-c2e3-43a9-ace4-1e988b2c1908"
 version = "1.3.0"
 
+[[deps.Newts]]
+deps = ["Test"]
+git-tree-sha1 = "9daacbfe4c222c1cc0a6efcbfb50d11f9991e6cc"
+repo-rev = "canon"
+repo-subdir = "Newts"
+repo-url = "https://github.com/computerscience-person/CCS239-Final-Project.git"
+uuid = "1a7d9eb9-e98c-4c2a-9c96-f43605fda9e4"
+version = "0.1.0"
+
 [[deps.OpenBLAS_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
 uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
@@ -338,7 +338,7 @@ version = "0.3.29+0"
 [[deps.OpenSSL_jll]]
 deps = ["Artifacts", "Libdl"]
 uuid = "458c3c95-2e84-50aa-8efc-19380b2a3a95"
-version = "3.5.4+0"
+version = "3.5.1+0"
 
 [[deps.Parsers]]
 deps = ["Dates", "PrecompileTools", "UUIDs"]
@@ -464,14 +464,14 @@ uuid = "8e850ede-7688-5339-a07c-302acd2aaf8d"
 version = "1.64.0+1"
 
 [[deps.p7zip_jll]]
-deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
+deps = ["Artifacts", "Libdl"]
 uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
-version = "17.7.0+0"
+version = "17.5.0+2"
 """
 
 # ╔═╡ Cell order:
-# ╠═f50c3f3f-b374-4640-a226-52ce534741ce
-# ╠═0c466cfc-13b0-405b-ba7c-3da46ebf96bc
+# ╠═091ece89-4b88-4bd8-8fc6-a29d08e2f653
+# ╠═e71106c5-5a1b-4558-b5db-86dba49b331c
 # ╠═e04c6f2d-bfa9-49d0-9d20-01d2a21cb095
 # ╠═0bda70c3-404e-4f34-a516-8dae153d7bb2
 # ╠═aa49c8bf-7c56-48d4-a6af-33bc4b69a3eb
