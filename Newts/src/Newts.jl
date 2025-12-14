@@ -95,12 +95,12 @@ function plot_optimal_value(P_x, x_i; r=(nothing, nothing), step=0.1)
     end
     eval_P_x(x) = evaluate_at(P_x, x)
     y = eval_P_x.(x)
-    Plots.plot(x, y)
+    Plots.plot(x, y, label="polynomial")
     Plots.plot!(
                 [x_i],
                 [eval_P_x(x_i)],
                 seriestype=:scatter,
-                label="optimal value:($(x_i), $(eval_P_x(x_i)))")
+                label="optimal value")
 end
 
 end # module Newts
