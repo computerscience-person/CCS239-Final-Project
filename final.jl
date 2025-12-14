@@ -25,44 +25,8 @@ using PlutoUI
 # ╔═╡ d1ff307e-07d5-4588-99ae-8517a1358e97
 using HypertextLiteral: @htl
 
-# ╔═╡ e04c6f2d-bfa9-49d0-9d20-01d2a21cb095
-md"# Test code"
-
-# ╔═╡ e71106c5-5a1b-4558-b5db-86dba49b331c
-evaluate_at([0], 3)
-
-# ╔═╡ 0bda70c3-404e-4f34-a516-8dae153d7bb2
-derivative_m = [
-	0 1 0 0
-	0 0 2 0
-	0 0 0 3 
-]
-
-# ╔═╡ aa49c8bf-7c56-48d4-a6af-33bc4b69a3eb
-zeros((2,))
-
-# ╔═╡ dd023058-f957-49ac-b319-a7b15bc987b0
-# Here, we have a polynomial 3x^3 - 4x^2 - 6
-# represented by a coefficient matrix, column-wise
-f_x = [-6.0, 0, -4, 3]
-
-# ╔═╡ 3882e8a8-dc06-4e48-a65a-56595a1bbe56
-derivative_m * f_x
-
-# ╔═╡ 9462f3d7-3b1e-4b8c-ac8f-a14bc24ed43c
-polynomial_derivative(f_x)
-
-# ╔═╡ 9ddc615c-cfe1-49f7-9ed6-0c9f75a833c7
-f2_x = [-6,0,2,4, 5, 8, 0.5]
-
-# ╔═╡ c2e927fc-28ff-4251-9a90-98876c1c2b46
-polynomial_derivative(f2_x)
-
-# ╔═╡ 2bec0759-ecaf-495b-9948-c2891aa56694
-# 6x^2 
-
 # ╔═╡ 64ac904e-279d-4b55-8e66-e630ab7e2f6e
-md"# UI"
+md"# Newton-Raphson Method for Optimization"
 
 # ╔═╡ 5a7ad147-f738-4645-a29c-cd1a88a7661a
 md"Add or delete additional terms:"
@@ -126,11 +90,8 @@ if display_extra[2]
 	end
 end
 
-# ╔═╡ 5d84d428-252e-4d83-b278-a113bb34584b
-
-
 # ╔═╡ 1061e2c4-cf51-4664-9200-752a455a3817
-md"# UI Utils"
+md"## UI Utils"
 
 # ╔═╡ 3bcd9669-e727-4f2b-82ed-8c6406607ba0
 function poly_to_latex(coeffs; var="x")
@@ -232,6 +193,9 @@ try
 	end
 catch exc
 		if isa(exc, UndefVarError)
+			if display_extra[1]
+				_ = newton_raphson_method(F_x, x_1, ϵ, display_table=true)
+			end
 			md"Value parse error..."
 		else
 			md"Something went wrong..."
@@ -1474,33 +1438,22 @@ version = "1.13.0+0"
 """
 
 # ╔═╡ Cell order:
-# ╠═e04c6f2d-bfa9-49d0-9d20-01d2a21cb095
-# ╠═091ece89-4b88-4bd8-8fc6-a29d08e2f653
-# ╠═e71106c5-5a1b-4558-b5db-86dba49b331c
-# ╠═0bda70c3-404e-4f34-a516-8dae153d7bb2
-# ╠═aa49c8bf-7c56-48d4-a6af-33bc4b69a3eb
-# ╠═3882e8a8-dc06-4e48-a65a-56595a1bbe56
-# ╠═dd023058-f957-49ac-b319-a7b15bc987b0
-# ╠═9462f3d7-3b1e-4b8c-ac8f-a14bc24ed43c
-# ╠═9ddc615c-cfe1-49f7-9ed6-0c9f75a833c7
-# ╠═c2e927fc-28ff-4251-9a90-98876c1c2b46
-# ╠═2bec0759-ecaf-495b-9948-c2891aa56694
-# ╠═64ac904e-279d-4b55-8e66-e630ab7e2f6e
-# ╠═c10c22b2-58e9-4b92-ad71-6977f2e0ba90
-# ╠═d1ff307e-07d5-4588-99ae-8517a1358e97
-# ╠═5a7ad147-f738-4645-a29c-cd1a88a7661a
-# ╠═9f6ff54f-d518-4099-af5d-82b26f1e4414
-# ╠═9abeee65-a0e5-4966-9684-11500bc33bc8
-# ╠═116e9cd7-21ba-4537-8e92-e0fe3c129c43
-# ╠═47490066-6bb2-4d90-9c34-3b201a0673fe
-# ╠═d45aea87-1f3a-456a-8d98-295d5c6fb873
-# ╠═2e4b9901-f68a-4684-a420-246e713bd7ff
-# ╠═8b1fa3d3-6ddc-44ba-a8d0-a0e99a7bc65c
-# ╠═259aeb4d-f08f-4a2c-b676-e34c159f39aa
-# ╠═80eb2733-b374-4965-aee6-4c3f4bc338d1
-# ╠═5d84d428-252e-4d83-b278-a113bb34584b
-# ╠═12ba14f0-d285-4955-9568-e1a958ded778
-# ╠═1061e2c4-cf51-4664-9200-752a455a3817
-# ╠═3bcd9669-e727-4f2b-82ed-8c6406607ba0
+# ╟─64ac904e-279d-4b55-8e66-e630ab7e2f6e
+# ╟─091ece89-4b88-4bd8-8fc6-a29d08e2f653
+# ╟─c10c22b2-58e9-4b92-ad71-6977f2e0ba90
+# ╟─d1ff307e-07d5-4588-99ae-8517a1358e97
+# ╟─5a7ad147-f738-4645-a29c-cd1a88a7661a
+# ╟─9f6ff54f-d518-4099-af5d-82b26f1e4414
+# ╟─9abeee65-a0e5-4966-9684-11500bc33bc8
+# ╟─116e9cd7-21ba-4537-8e92-e0fe3c129c43
+# ╟─47490066-6bb2-4d90-9c34-3b201a0673fe
+# ╟─d45aea87-1f3a-456a-8d98-295d5c6fb873
+# ╟─2e4b9901-f68a-4684-a420-246e713bd7ff
+# ╟─8b1fa3d3-6ddc-44ba-a8d0-a0e99a7bc65c
+# ╟─259aeb4d-f08f-4a2c-b676-e34c159f39aa
+# ╟─80eb2733-b374-4965-aee6-4c3f4bc338d1
+# ╟─12ba14f0-d285-4955-9568-e1a958ded778
+# ╟─1061e2c4-cf51-4664-9200-752a455a3817
+# ╟─3bcd9669-e727-4f2b-82ed-8c6406607ba0
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
