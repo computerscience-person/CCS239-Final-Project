@@ -152,7 +152,7 @@ $
 
   To run, it needs the Julia programming language, and the Pluto Julia library.
 
-- #link("https://computerscience-person.github.io/CCS239-Final-Project/final.jl")[UI only (code will *not* run)]
+- #link("https://computerscience-person.github.io/CCS239-Final-Project/final.html")[UI only (code will *not* run)]
 
 #pagebreak()
 
