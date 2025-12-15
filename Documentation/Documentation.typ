@@ -146,6 +146,16 @@ $
 
 #pagebreak()
 
+= Assets
+
+- #link("https://github.com/computerscience-person/CCS239-Final-Project")[GitHub Link]
+
+  To run, it needs the Julia programming language, and the Pluto Julia library.
+
+- #link("https://computerscience-person.github.io/CCS239-Final-Project/final.jl")[UI only (code will *not* run)]
+
+#pagebreak()
+
 = Recommendations
 
 - Extend the solver to be able to calculate derivatives for trigonometric and exponential functions.
