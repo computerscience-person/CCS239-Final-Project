@@ -2,7 +2,7 @@
 
 Members:
 - Oliver Ladores @computerscience-person
-- Khee Jay Galvez [add github username here]
+- Khee Jay Galvez @kheejaygalvez
 - Dhominick John Billena [add github username here]
 
 This project aims to develop an app implementing the Newton-Raphson Method for
